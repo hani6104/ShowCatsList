@@ -38,13 +38,13 @@ class CatsScreen extends StatelessWidget {
             // Future.delayed(const Duration(milliseconds: 500), () {});
             if (snapshot.hasData) {
               List<CatsViewModel>? data = snapshot.data;
-              return Consumer<CatsViewModel>(
-                  builder: (context, value, child) => ListView.builder(
+              return ListView.builder(
                       itemCount: data!.length,
                       // controller: controller,
                       itemBuilder: (BuildContext context, int index) {
-                        return listItem(data: data, index: index, width: w);
-                      }));
+                        return Consumer<CatsViewModel>(
+                   builder: (context, value, child) =>  listItem(data: data, index: index, width: w));
+                      });
             } else if (snapshot.hasError) {
               return Text("${snapshot.error}");
             }
